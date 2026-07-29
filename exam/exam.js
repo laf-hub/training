@@ -176,6 +176,20 @@
     },
   ];
 
+  function fillGoldText(ctx, text, x, y, fontSizePx) {
+    const gradient = ctx.createLinearGradient(0, y - fontSizePx * 0.8, 0, y + fontSizePx * 0.25);
+    gradient.addColorStop(0, "#f0dca0");
+    gradient.addColorStop(0.5, "#c8a13a");
+    gradient.addColorStop(1, "#8a6a24");
+    ctx.save();
+    ctx.shadowColor = "rgba(74, 55, 20, 0.25)";
+    ctx.shadowBlur = 2;
+    ctx.shadowOffsetY = 1;
+    ctx.fillStyle = gradient;
+    ctx.fillText(text, x, y);
+    ctx.restore();
+  }
+
   function loadImage(src) {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -228,17 +242,15 @@
     ctx.lineTo(w / 2 + 90, 68 + logoH + 44);
     ctx.stroke();
 
-    ctx.fillStyle = c.bronzeDark;
     ctx.font = "bold 30px Georgia, serif";
-    ctx.fillText("CERTIFICATE OF COMPLETION", w / 2, 68 + logoH + 90);
+    fillGoldText(ctx, "CERTIFICATE OF COMPLETION", w / 2, 68 + logoH + 90, 30);
 
     ctx.fillStyle = c.text;
     ctx.font = "22px Georgia, serif";
     ctx.fillText("This certifies that", w / 2, 68 + logoH + 140);
 
     ctx.font = "bold 44px Georgia, serif";
-    ctx.fillStyle = c.bronzeDark;
-    ctx.fillText(name, w / 2, 68 + logoH + 202);
+    fillGoldText(ctx, name, w / 2, 68 + logoH + 202, 44);
 
     ctx.fillStyle = c.text;
     ctx.font = "22px Georgia, serif";
