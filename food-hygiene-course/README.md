@@ -13,7 +13,7 @@ It is **not** a regulated qualification — only an Ofqual-recognised awarding b
 Plain HTML5 / CSS3 / vanilla JavaScript — no framework, no build step, no external dependencies. Everything runs from static files, so it's free to host forever (e.g. GitHub Pages) and works offline by just opening `index.html` in a browser.
 
 - `index.html` — course landing page and module index
-- `modules/01-...html` through `10-...html` — each module is a slide deck (prev/next navigation, keyboard arrows, progress dots), built with the shared engine in `assets/slides.js`. The first slide of each module is statically visible even with JavaScript disabled; prev/next navigation between the rest of a module's slides requires JS.
+- `modules/01-...html` through `10-...html` — each module is a slide deck (prev/next navigation, keyboard arrows, progress dots), built with the shared engine in `assets/slides.js`. The first slide of each module is statically visible even with JavaScript disabled; prev/next navigation between the rest of a module's slides requires JS. Each module opens with a "What this module covers" preview slide (an advance organiser, listing what's ahead) with a duration estimate badge in the top-right corner, and closes with a "Summary" recap slide plus a self-check.
 - `assets/style.css` — shared styling, light/dark aware
 - `assets/icons/*.svg` — small original icon set used across slides
 - `exam/index.html` + `exam/questions.js` + `exam/exam.js` — the 40-question bank, randomly drawn down to a 30-question exam per attempt
