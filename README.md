@@ -30,13 +30,13 @@ See `AUDIT.md` for a full independent audit of this course (factual accuracy, ex
 
 ## Keeping it off search engines
 
-- `robots.txt` at the repo root and inside `food-hygiene-course/` disallow all crawling.
+- `robots.txt` at the repo root disallows all crawling.
 - Every page has `<meta name="robots" content="noindex, nofollow, noarchive">`.
 - The site is still **not access-controlled** — anyone with the direct link can view it and sit the exam, which is intentional for staff onboarding (no login friction). It just won't turn up in search results or be discoverable without the link.
 
 ## Hosting for free
 
-Enable GitHub Pages on this repository (Settings → Pages), serving from this branch, and point it at the `/food-hygiene-course` folder (or move these files to the repo root / a `docs/` folder, whichever Pages setup you prefer). The repo needs to stay public for Pages to be free.
+Enable GitHub Pages on this repository (Settings → Pages), serving from this branch, root folder. The repo needs to stay public for Pages to be free. With the site files at the repo root, it's served at `https://lafromagerie.github.io/food-safety-training/` with no extra path segment.
 
 ## Possible next steps
 
