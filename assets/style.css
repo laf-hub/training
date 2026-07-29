@@ -222,6 +222,23 @@ footer.site {
   position: relative;
 }
 
+.deck-watermark {
+  position: absolute;
+  top: 0.7rem;
+  left: 1rem;
+  height: 20px;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.deck-watermark img {
+  height: 100%;
+  width: auto;
+  display: block;
+  mix-blend-mode: multiply;
+}
+
 .slide {
   display: none;
   position: relative;
