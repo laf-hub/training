@@ -13,17 +13,20 @@ It is **not** a regulated qualification — only an Ofqual-recognised awarding b
 Plain HTML5 / CSS3 / vanilla JavaScript — no framework, no build step, no external dependencies. Everything runs from static files, so it's free to host forever (e.g. GitHub Pages) and works offline by just opening `index.html` in a browser.
 
 - `index.html` — course landing page and module index
-- `modules/01-...html` through `10-...html` — each module is a slide deck (prev/next navigation, keyboard arrows, progress dots), built with the shared engine in `assets/slides.js`
+- `modules/01-...html` through `10-...html` — each module is a slide deck (prev/next navigation, keyboard arrows, progress dots), built with the shared engine in `assets/slides.js`. The first slide of each module is statically visible even with JavaScript disabled; prev/next navigation between the rest of a module's slides requires JS.
 - `assets/style.css` — shared styling, light/dark aware
 - `assets/icons/*.svg` — small original icon set used across slides
-- `exam/index.html` + `exam/questions.js` + `exam/exam.js` — the 30-question final exam
+- `exam/index.html` + `exam/questions.js` + `exam/exam.js` — the 40-question bank, randomly drawn down to a 30-question exam per attempt
 
 ## Exam design
 
-- 30 questions (3 per module), question order and answer-option order shuffled per attempt.
+- 40 questions in the bank (4 per module); each attempt randomly draws 3 per module (30 total), with question and answer-option order shuffled — so repeated attempts don't see the exact same paper.
 - Pass mark: **70%**.
 - Correct answers are stored as **SHA-256 hashes** (`questionId|normalizedAnswerText`), not plain text, so casually viewing page source doesn't reveal the answer key. The learner's selected answer is hashed the same way and compared. This is a deterrent proportionate to internal compliance training, not a defence against a determined attacker — there's no server, so nothing stronger is possible without adding a backend.
-- On passing, the learner can generate a downloadable PNG certificate (name, score, date) via an HTML canvas — no server or external service involved. The certificate text includes an honest disclaimer that it isn't a regulated qualification or formally CPD-accredited (yet).
+- It's unproctored and doesn't verify identity — that's stated plainly on the exam page itself, not just in this README.
+- On passing, the learner can generate a downloadable PNG certificate (name, score, date, and a reference ID) via an HTML canvas — no server or external service involved. The certificate text includes an honest disclaimer that it isn't a regulated qualification or formally CPD-accredited (yet).
+
+See `AUDIT.md` for a full independent audit of this course (factual accuracy, exam quality, accessibility, practical failure points) and exactly what was fixed versus deliberately left as an open gap.
 
 ## Keeping it off search engines
 

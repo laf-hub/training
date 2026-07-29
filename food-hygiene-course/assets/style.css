@@ -97,6 +97,17 @@ h3 { font-size: 1.05rem; margin-top: 1.4rem; }
   margin: 1.1rem 0;
 }
 
+.disclaimer {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.4rem;
+  margin: 1.1rem 0;
+  font-size: 0.98rem;
+}
+
+.disclaimer strong { color: var(--accent); }
+
 .callout {
   border-left: 4px solid var(--accent);
   background: var(--surface);
@@ -301,9 +312,21 @@ footer.site {
   border-radius: var(--radius);
   padding: 1.1rem 1.3rem;
   margin: 1rem 0;
+  min-width: 0;
 }
 
-.q-block p.q-text { font-weight: 600; margin-top: 0; }
+.q-block .q-text { font-weight: 600; margin-top: 0; padding: 0; }
+
+#exam-error-banner {
+  display: none;
+  background: var(--surface);
+  border: 2px solid var(--bad);
+  color: var(--bad);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.2rem;
+  margin: 1rem 0;
+  font-weight: 600;
+}
 
 .q-block label {
   display: block;

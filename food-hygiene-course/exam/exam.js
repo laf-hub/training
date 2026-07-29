@@ -1,5 +1,6 @@
 (function () {
   const PASS_MARK = 70; // percent
+  const QUESTIONS_PER_MODULE = 3; // drawn at random from each module's pool each attempt
   const COURSE_TITLE = "Food Hygiene and Safety Course (Level 2 Equivalent)";
 
   function shuffle(arr) {
@@ -20,25 +21,38 @@
     return text.trim().toLowerCase();
   }
 
+  function pickQuestionSet() {
+    const byModule = {};
+    EXAM_QUESTIONS.forEach((q) => {
+      (byModule[q.module] = byModule[q.module] || []).push(q);
+    });
+    let picked = [];
+    Object.keys(byModule).forEach((mod) => {
+      picked = picked.concat(shuffle(byModule[mod]).slice(0, QUESTIONS_PER_MODULE));
+    });
+    return shuffle(picked);
+  }
+
   let sessionQuestions = [];
 
   function renderExam() {
     const form = document.getElementById("exam-form");
-    sessionQuestions = shuffle(EXAM_QUESTIONS).map((q) => ({
+    document.getElementById("exam-error-banner").style.display = "none";
+    sessionQuestions = pickQuestionSet().map((q) => ({
       ...q,
       shuffledOptions: shuffle(q.options),
     }));
 
     form.innerHTML = "";
     sessionQuestions.forEach((q, idx) => {
-      const block = document.createElement("div");
+      const block = document.createElement("fieldset");
       block.className = "q-block";
       block.dataset.qid = q.id;
 
-      const p = document.createElement("p");
-      p.className = "q-text";
-      p.textContent = (idx + 1) + ". " + q.text;
-      block.appendChild(p);
+      const legend = document.createElement("legend");
+      legend.className = "q-text";
+      legend.textContent = (idx + 1) + ". " + q.text;
+      block.appendChild(legend);
 
       q.shuffledOptions.forEach((opt, oi) => {
         const label = document.createElement("label");
@@ -74,10 +88,16 @@
     );
 
     if (unanswered.length > 0) {
+      const banner = document.getElementById("exam-error-banner");
+      banner.textContent =
+        "You have " + unanswered.length + " unanswered question" + (unanswered.length === 1 ? "" : "s") +
+        " (highlighted in red below). Answer all questions before submitting.";
+      banner.style.display = "block";
       const first = document.querySelector('.q-block[data-qid="' + unanswered[0] + '"]');
       first.scrollIntoView({ behavior: "smooth", block: "center" });
       return null;
     }
+    document.getElementById("exam-error-banner").style.display = "none";
 
     const correctCount = results.filter((r) => r.correct).length;
     const pct = Math.round((correctCount / results.length) * 100);
@@ -123,15 +143,17 @@
       "</div>" +
       "</div>";
 
-    document.getElementById("gen-cert-btn").addEventListener("click", () => {
+    document.getElementById("gen-cert-btn").addEventListener("click", async () => {
       const name = document.getElementById("learner-name").value.trim() || "Course Participant";
-      drawCertificate(name, result.pct);
+      await drawCertificate(name, result.pct);
       document.getElementById("cert-canvas").style.display = "block";
       document.getElementById("cert-actions").style.display = "block";
     });
   }
 
-  function drawCertificate(name, pct) {
+  async function drawCertificate(name, pct) {
+    const dateStr = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    const refId = (await sha256Hex(name + "|" + pct + "|" + dateStr + "|" + Date.now())).slice(0, 10).toUpperCase();
     const canvas = document.getElementById("cert-canvas");
     const ctx = canvas.getContext("2d");
     const w = canvas.width, h = canvas.height;
@@ -164,9 +186,11 @@
     wrapText(ctx, "covering retail, bar and kitchen food safety practice,", w / 2, 395, w - 200, 30);
     wrapText(ctx, "achieving a score of " + pct + "%.", w / 2, 430, w - 200, 30);
 
-    const dateStr = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     ctx.font = "20px Georgia, serif";
     ctx.fillText("Date completed: " + dateStr, w / 2, 500);
+    ctx.font = "14px Georgia, serif";
+    ctx.fillStyle = "#5a5a5a";
+    ctx.fillText("Certificate reference: " + refId, w / 2, 525);
 
     ctx.font = "italic 15px Georgia, serif";
     ctx.fillStyle = "#5a5a5a";
