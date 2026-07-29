@@ -8,6 +8,15 @@
 //   </div>
 // </div>
 (function () {
+  var LONG_SLIDE_WORD_THRESHOLD = 120;
+  var SHORT_SLIDE_LOCK_MS = 10000;
+  var LONG_SLIDE_LOCK_MS = 15000;
+
+  function wordCount(el) {
+    var text = el.textContent.trim();
+    return text ? text.split(/\s+/).length : 0;
+  }
+
   function initDeck(deck) {
     var slides = Array.prototype.slice.call(deck.querySelectorAll(".slide"));
     var prevBtn = deck.querySelector('[data-action="prev"]');
@@ -15,6 +24,17 @@
     var countEl = deck.querySelector(".deck-count");
     var dotsEl = deck.querySelector(".deck-dots");
     var current = 0;
+    var nextTimer = null;
+
+    function lockNext() {
+      if (!nextBtn) return;
+      clearTimeout(nextTimer);
+      nextBtn.disabled = true;
+      var delay = wordCount(slides[current]) > LONG_SLIDE_WORD_THRESHOLD ? LONG_SLIDE_LOCK_MS : SHORT_SLIDE_LOCK_MS;
+      nextTimer = setTimeout(function () {
+        nextBtn.disabled = false;
+      }, delay);
+    }
 
     if (dotsEl) {
       slides.forEach(function () {
@@ -35,12 +55,13 @@
       }
       if (prevBtn) prevBtn.disabled = current === 0;
       if (nextBtn) {
-        nextBtn.disabled = false;
         nextBtn.textContent = current === slides.length - 1 ? "Finish" : "Next";
       }
+      lockNext();
     }
 
     function go(delta) {
+      if (delta > 0 && nextBtn && nextBtn.disabled) return;
       var target = current + delta;
       if (target < 0) return;
       if (target >= slides.length) {

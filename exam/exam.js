@@ -45,12 +45,15 @@
 
     form.innerHTML = "";
     sessionQuestions.forEach((q, idx) => {
-      const block = document.createElement("fieldset");
+      const block = document.createElement("div");
       block.className = "q-block";
       block.dataset.qid = q.id;
+      block.setAttribute("role", "radiogroup");
+      block.setAttribute("aria-labelledby", "qtext-" + q.id);
 
-      const legend = document.createElement("legend");
+      const legend = document.createElement("p");
       legend.className = "q-text";
+      legend.id = "qtext-" + q.id;
       legend.textContent = (idx + 1) + ". " + q.text;
       block.appendChild(legend);
 
