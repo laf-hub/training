@@ -154,51 +154,137 @@
     });
   }
 
+  const CERT_COLORS = {
+    background: "#fbf8f2",
+    bronze: "#7a5a32",
+    bronzeDark: "#4f3922",
+    gold: "#b89552",
+    text: "#1c1a17",
+    textMuted: "#5f584f",
+  };
+
+  const SIGNATORIES = [
+    {
+      image: "../assets/signature-michael-sparrow.png",
+      name: "Michael Sparrow",
+      titles: ["Quality & Technical Manager", "Course Author / Technical Lead"],
+    },
+    {
+      image: "../assets/signature-patricia-michelson.png",
+      name: "Patricia Michelson",
+      titles: ["Founder / Director", "Authorising Signatory"],
+    },
+  ];
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
   async function drawCertificate(name, pct) {
     const dateStr = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
     const refId = (await sha256Hex(name + "|" + pct + "|" + dateStr + "|" + Date.now())).slice(0, 10).toUpperCase();
     const canvas = document.getElementById("cert-canvas");
     const ctx = canvas.getContext("2d");
     const w = canvas.width, h = canvas.height;
+    const c = CERT_COLORS;
 
-    ctx.fillStyle = "#f7f5f0";
+    const [logoImg, ...sigImgs] = await Promise.all([
+      loadImage("../assets/la-fromagerie-logo.jpg"),
+      ...SIGNATORIES.map((s) => loadImage(s.image)),
+    ]);
+
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.fillStyle = c.background;
     ctx.fillRect(0, 0, w, h);
 
-    ctx.strokeStyle = "#8a1f11";
-    ctx.lineWidth = 8;
-    ctx.strokeRect(30, 30, w - 60, h - 60);
-    ctx.lineWidth = 2;
-    ctx.strokeRect(50, 50, w - 100, h - 100);
+    ctx.strokeStyle = c.bronzeDark;
+    ctx.lineWidth = 10;
+    ctx.strokeRect(24, 24, w - 48, h - 48);
+    ctx.strokeStyle = c.gold;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(44, 44, w - 88, h - 88);
 
-    ctx.fillStyle = "#8a1f11";
+    const logoW = 300;
+    const logoH = logoW * (logoImg.height / logoImg.width);
+    ctx.globalCompositeOperation = "multiply";
+    ctx.drawImage(logoImg, w / 2 - logoW / 2, 68, logoW, logoH);
+    ctx.globalCompositeOperation = "source-over";
+
     ctx.textAlign = "center";
+    ctx.fillStyle = c.bronzeDark;
+    ctx.font = "15px Georgia, serif";
+    ctx.fillText("ISSUED BY LA FROMAGERIE LTD", w / 2, 68 + logoH + 30);
+
+    ctx.strokeStyle = c.gold;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(w / 2 - 90, 68 + logoH + 44);
+    ctx.lineTo(w / 2 + 90, 68 + logoH + 44);
+    ctx.stroke();
+
+    ctx.fillStyle = c.bronzeDark;
     ctx.font = "bold 30px Georgia, serif";
-    ctx.fillText("CERTIFICATE OF COMPLETION", w / 2, 150);
+    ctx.fillText("CERTIFICATE OF COMPLETION", w / 2, 68 + logoH + 90);
 
-    ctx.fillStyle = "#1e1e1e";
+    ctx.fillStyle = c.text;
     ctx.font = "22px Georgia, serif";
-    ctx.fillText("This certifies that", w / 2, 230);
+    ctx.fillText("This certifies that", w / 2, 68 + logoH + 140);
 
-    ctx.font = "bold 46px Georgia, serif";
-    ctx.fillStyle = "#8a1f11";
-    ctx.fillText(name, w / 2, 300);
+    ctx.font = "bold 44px Georgia, serif";
+    ctx.fillStyle = c.bronzeDark;
+    ctx.fillText(name, w / 2, 68 + logoH + 202);
 
-    ctx.fillStyle = "#1e1e1e";
+    ctx.fillStyle = c.text;
     ctx.font = "22px Georgia, serif";
-    wrapText(ctx, "has completed the " + COURSE_TITLE + ",", w / 2, 360, w - 200, 30);
-    wrapText(ctx, "covering retail, bar and kitchen food safety practice,", w / 2, 395, w - 200, 30);
-    wrapText(ctx, "achieving a score of " + pct + "%.", w / 2, 430, w - 200, 30);
+    const bodyTop = 68 + logoH + 250;
+    wrapText(ctx, "has completed the " + COURSE_TITLE + ",", w / 2, bodyTop, w - 200, 30);
+    wrapText(ctx, "covering retail, bar and kitchen food safety practice,", w / 2, bodyTop + 35, w - 200, 30);
+    wrapText(ctx, "achieving a score of " + pct + "%.", w / 2, bodyTop + 70, w - 200, 30);
 
     ctx.font = "20px Georgia, serif";
-    ctx.fillText("Date completed: " + dateStr, w / 2, 500);
+    ctx.fillStyle = c.text;
+    ctx.fillText("Date completed: " + dateStr, w / 2, bodyTop + 130);
     ctx.font = "14px Georgia, serif";
-    ctx.fillStyle = "#5a5a5a";
-    ctx.fillText("Certificate reference: " + refId, w / 2, 525);
+    ctx.fillStyle = c.textMuted;
+    ctx.fillText("Certificate reference: " + refId, w / 2, bodyTop + 155);
 
-    ctx.font = "italic 15px Georgia, serif";
-    ctx.fillStyle = "#5a5a5a";
-    wrapText(ctx, "This course is structured in line with CPD good-practice principles. It is an internal training", w / 2, 620, w - 240, 22);
-    wrapText(ctx, "resource and has not been submitted to a formal CPD accreditation body.", w / 2, 645, w - 240, 22);
+    ctx.font = "italic 14px Georgia, serif";
+    ctx.fillStyle = c.textMuted;
+    wrapText(ctx, "This course is structured in line with CPD good-practice principles. It is an internal training", w / 2, bodyTop + 195, w - 260, 20);
+    wrapText(ctx, "resource and has not been submitted to a formal CPD accreditation body.", w / 2, bodyTop + 217, w - 260, 20);
+
+    const sigLineY = h - 118;
+    const sigCenters = [w * 0.28, w * 0.72];
+    SIGNATORIES.forEach((sig, i) => {
+      const img = sigImgs[i];
+      const sigH = 46;
+      const sigW = sigH * (img.width / img.height);
+      const cx = sigCenters[i];
+      ctx.drawImage(img, cx - sigW / 2, sigLineY - sigH - 6, sigW, sigH);
+
+      ctx.strokeStyle = c.gold;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(cx - 130, sigLineY);
+      ctx.lineTo(cx + 130, sigLineY);
+      ctx.stroke();
+
+      ctx.fillStyle = c.bronzeDark;
+      ctx.font = "bold 16px Georgia, serif";
+      ctx.fillText(sig.name, cx, sigLineY + 24);
+
+      ctx.fillStyle = c.textMuted;
+      ctx.font = "13px Georgia, serif";
+      sig.titles.forEach((line, li) => {
+        ctx.fillText(line, cx, sigLineY + 42 + li * 17);
+      });
+    });
   }
 
   function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
