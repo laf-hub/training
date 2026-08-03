@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 280" fill="none" stroke="#4F3922" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="20" y="16" width="340" height="248" rx="10"/>
+  <line x1="20" y1="60" x2="360" y2="60" stroke-width="2"/>
+
+  <text x="40" y="42" font-size="18" font-weight="700" fill="#4F3922" stroke="none">Ploughman's Sandwich</text>
+
+  <text x="40" y="84" font-size="13" font-weight="700" fill="#4F3922" stroke="none">Ingredients:</text>
+  <text x="40" y="106" font-size="13" fill="#4F3922" stroke="none">Bread (<tspan font-weight="700">WHEAT</tspan>), Cheddar</text>
+  <text x="40" y="126" font-size="13" fill="#4F3922" stroke="none">(<tspan font-weight="700">MILK</tspan>), Butter (<tspan font-weight="700">MILK</tspan>),</text>
+  <text x="40" y="146" font-size="13" fill="#4F3922" stroke="none">Chutney (<tspan font-weight="700">MUSTARD</tspan>),</text>
+  <text x="40" y="166" font-size="13" fill="#4F3922" stroke="none">Lettuce.</text>
+
+  <rect x="40" y="182" width="300" height="2" fill="#D8D0C2" stroke="none"/>
+
+  <g stroke="none" fill="#B89552">
+    <rect x="40" y="196" width="14" height="14" rx="2"/>
+  </g>
+  <text x="62" y="207" font-size="13" font-weight="700" fill="#4F3922" stroke="none">Allergens shown in BOLD</text>
+
+  <text x="40" y="238" font-size="13" font-weight="700" fill="#9C3B2E" stroke="none">Use by: see label on pack</text>
+  <text x="40" y="256" font-size="12" fill="#5F584F" stroke="none">Packed on these premises</text>
+</svg>

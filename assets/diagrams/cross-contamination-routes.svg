@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 280" fill="none" stroke="#4F3922" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <!-- Hands -->
+  <g transform="translate(40,30)">
+    <path d="M10 60 Q10 30 18 22 Q22 30 20 40"/>
+    <path d="M18 22 Q24 18 28 26 Q30 34 26 42"/>
+    <path d="M28 26 Q34 22 37 30 Q38 38 34 44"/>
+    <path d="M37 30 Q43 28 44 36 L42 46"/>
+    <path d="M10 60 Q10 74 22 80 L38 80 Q50 74 50 60"/>
+    <text x="30" y="112" text-anchor="middle" font-size="15" fill="#4F3922" stroke="none">Hands</text>
+  </g>
+  <!-- Knife -->
+  <g transform="translate(190,30)">
+    <path d="M4 70 L36 38 Q42 32 48 38 Q54 44 48 50 L16 78 Z"/>
+    <line x1="4" y1="70" x2="-8" y2="82"/>
+    <text x="26" y="112" text-anchor="middle" font-size="15" fill="#4F3922" stroke="none">Knife</text>
+  </g>
+  <!-- Cloth -->
+  <g transform="translate(330,30)">
+    <path d="M6 30 Q30 20 54 30 Q60 50 54 70 Q30 80 6 70 Q0 50 6 30 Z"/>
+    <path d="M16 40 Q30 46 44 40" stroke-width="2"/>
+    <path d="M16 54 Q30 60 44 54" stroke-width="2"/>
+    <text x="30" y="112" text-anchor="middle" font-size="15" fill="#4F3922" stroke="none">Cloth</text>
+  </g>
+  <!-- Board -->
+  <g transform="translate(490,30)">
+    <rect x="4" y="26" width="56" height="46" rx="8"/>
+    <circle cx="52" cy="30" r="3" fill="#4F3922" stroke="none"/>
+    <text x="32" y="112" text-anchor="middle" font-size="15" fill="#4F3922" stroke="none">Board</text>
+  </g>
+
+  <!-- Converging arrows (hazard colour) -->
+  <g stroke="#9C3B2E" stroke-width="2.5">
+    <path d="M60 120 Q160 170 280 196" marker-end="url(#arrow)"/>
+    <path d="M216 120 Q250 160 292 190" marker-end="url(#arrow)"/>
+    <path d="M356 120 Q330 160 310 190" marker-end="url(#arrow)"/>
+    <path d="M516 120 Q420 170 330 196" marker-end="url(#arrow)"/>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0 0 L8 4 L0 8 Z" fill="#9C3B2E" stroke="none"/>
+    </marker>
+  </defs>
+
+  <!-- Ready-to-eat plate -->
+  <g transform="translate(270,196)">
+    <ellipse cx="40" cy="16" rx="42" ry="16" fill="#FBF8F2" stroke="#9C3B2E" stroke-width="3"/>
+    <text x="40" y="60" text-anchor="middle" font-size="16" font-weight="700" fill="#9C3B2E" stroke="none">Ready-to-eat food</text>
+  </g>
+</svg>
