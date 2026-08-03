@@ -180,6 +180,31 @@ ul, ol { padding-left: 1.3rem; }
   color: var(--bronze-dark);
 }
 
+.check + .check {
+  margin-top: 0.8rem;
+}
+
+.core-rule {
+  background: var(--surface);
+  border-left: 4px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.7rem 1.1rem;
+  margin: 0.9rem 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--bronze-dark);
+}
+
+.core-rule .tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
 .module-nav {
   display: flex;
   justify-content: space-between;
