@@ -407,6 +407,94 @@ footer.site {
   color: var(--bronze-dark);
 }
 
+/* --- Review mode (internal only, gated by ?review=1 + passphrase) --- */
+
+.review-banner {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--gold);
+  color: var(--bronze-dark);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+}
+
+.review-panel {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 0.8rem;
+  max-width: 240px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.review-panel-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.review-panel-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.6rem;
+}
+
+.review-panel-links a {
+  display: inline-block;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--bronze-dark);
+  text-decoration: none;
+}
+
+.review-panel-links a:hover {
+  border-color: var(--gold);
+}
+
+.review-panel-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.review-panel-actions button {
+  background: var(--bronze);
+  color: var(--ink-on-bronze);
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.review-panel-exit {
+  font-size: 0.78rem;
+  color: var(--bad);
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+}
+
+.review-panel-exit:hover {
+  text-decoration: underline;
+}
+
 @keyframes fade {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
@@ -561,7 +649,8 @@ footer.site {
 
 @media print {
   header.site, footer.site, .deck-controls, .module-nav, .cta,
-  #submit-exam-btn, #cert-actions, #learner-name, #gen-cert-btn {
+  #submit-exam-btn, #cert-actions, #learner-name, #gen-cert-btn,
+  .review-banner, .review-panel {
     display: none !important;
   }
 

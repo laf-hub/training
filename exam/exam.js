@@ -122,7 +122,12 @@
         : '<p>Review the modules and try again when ready.</p><button id="retry-btn" type="button" class="cta">Retry the exam</button>');
 
     if (result.pass) {
-      renderCertificateForm(result);
+      if (window.FHSCReview && window.FHSCReview.active) {
+        document.getElementById("cert-section").innerHTML =
+          "<p>Certificates are not issued in review mode.</p>";
+      } else {
+        renderCertificateForm(result);
+      }
     } else {
       document.getElementById("retry-btn").addEventListener("click", () => {
         resultEl.style.display = "none";

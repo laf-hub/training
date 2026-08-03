@@ -28,6 +28,10 @@
 
     function lockNext() {
       if (!nextBtn) return;
+      if (window.FHSCReview && window.FHSCReview.active) {
+        nextBtn.disabled = false;
+        return;
+      }
       clearTimeout(nextTimer);
       nextBtn.disabled = true;
       var delay = wordCount(slides[current]) > LONG_SLIDE_WORD_THRESHOLD ? LONG_SLIDE_LOCK_MS : SHORT_SLIDE_LOCK_MS;
