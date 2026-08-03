@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 260" fill="none" stroke="#4F3922" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <line x1="240" y1="20" x2="240" y2="220" stroke="#D8D0C2" stroke-width="2" stroke-dasharray="6 6"/>
+
+  <!-- Deep pot: slow cooling -->
+  <g transform="translate(50,40)">
+    <rect x="20" y="30" width="80" height="110" rx="8"/>
+    <line x1="20" y1="30" x2="100" y2="30" stroke-width="4"/>
+    <path d="M55 10 Q60 0 55 -10" stroke="#9C3B2E" stroke-width="2"/>
+    <path d="M65 10 Q70 0 65 -10" stroke="#9C3B2E" stroke-width="2"/>
+    <circle cx="118" cy="14" r="14" fill="#9C3B2E" stroke="none"/>
+    <path d="M112 8 L124 20 M124 8 L112 20" stroke="#FBF8F2" stroke-width="2.5"/>
+    <text x="60" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#9C3B2E" stroke="none">Deep container</text>
+    <text x="60" y="198" text-anchor="middle" font-size="13" fill="#4F3922" stroke="none">Centre stays warm</text>
+    <text x="60" y="216" text-anchor="middle" font-size="13" fill="#4F3922" stroke="none">for a long time</text>
+  </g>
+
+  <!-- Shallow trays: fast cooling -->
+  <g transform="translate(290,40)">
+    <rect x="0" y="70" width="46" height="22" rx="5"/>
+    <line x1="0" y1="70" x2="46" y2="70" stroke-width="3"/>
+    <rect x="54" y="70" width="46" height="22" rx="5"/>
+    <line x1="54" y1="70" x2="100" y2="70" stroke-width="3"/>
+    <path d="M12 55 Q16 45 12 36" stroke="#3F6B2F" stroke-width="2"/>
+    <path d="M22 55 Q26 45 22 36" stroke="#3F6B2F" stroke-width="2"/>
+    <path d="M32 55 Q36 45 32 36" stroke="#3F6B2F" stroke-width="2"/>
+    <path d="M66 55 Q70 45 66 36" stroke="#3F6B2F" stroke-width="2"/>
+    <path d="M76 55 Q80 45 76 36" stroke="#3F6B2F" stroke-width="2"/>
+    <path d="M86 55 Q90 45 86 36" stroke="#3F6B2F" stroke-width="2"/>
+    <circle cx="118" cy="14" r="14" fill="#3F6B2F" stroke="none"/>
+    <path d="M111 15 L116 21 L127 8" stroke="#FBF8F2" stroke-width="2.5"/>
+    <text x="50" y="118" text-anchor="middle" font-size="16" font-weight="700" fill="#3F6B2F" stroke="none">Shallow containers</text>
+    <text x="50" y="138" text-anchor="middle" font-size="13" fill="#4F3922" stroke="none">More surface area,</text>
+    <text x="50" y="156" text-anchor="middle" font-size="13" fill="#4F3922" stroke="none">heat escapes faster</text>
+  </g>
+</svg>
