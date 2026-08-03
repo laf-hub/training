@@ -65,6 +65,10 @@
       var target = current + delta;
       if (target < 0) return;
       if (target >= slides.length) {
+        var moduleNum = parseInt(deck.getAttribute("data-module"), 10);
+        if (moduleNum && window.FHSCProgress) {
+          window.FHSCProgress.markModuleComplete(moduleNum);
+        }
         var end = deck.getAttribute("data-end-href");
         if (end) window.location.href = end;
         return;

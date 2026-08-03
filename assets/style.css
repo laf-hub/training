@@ -221,6 +221,46 @@ ul, ol { padding-left: 1.3rem; }
   font-size: 0.8rem;
 }
 
+.mod-status {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-top: 0.3rem;
+}
+
+.mod-card--complete {
+  border-color: var(--bronze);
+}
+
+.mod-card--complete .mod-status { color: var(--ok); }
+
+.mod-card--locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.mod-card--locked .mod-status { color: var(--text-muted); }
+
+.progress-summary {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--bronze-dark);
+  margin: 0 0 0.8rem;
+}
+
+.progress-banner {
+  display: none;
+  background: var(--surface);
+  border: 2px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.2rem;
+  margin: 1.1rem 0;
+  font-weight: 600;
+  color: var(--bronze-dark);
+}
+
 .cta {
   display: inline-block;
   background: var(--bronze);
